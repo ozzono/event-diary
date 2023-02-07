@@ -1,0 +1,68 @@
+basePath: /diario
+definitions:
+  models.Record:
+    properties:
+      description:
+        type: string
+      event_time:
+        type: string
+      id:
+        type: integer
+      regtime:
+        type: string
+      user:
+        type: string
+    type: object
+  web.APIError:
+    properties:
+      errorCode:
+        type: integer
+      errorMessage:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Ferramenta simplificada para registro de crises de Lara
+  title: MonitoLara - Diário de Crise
+paths:
+  /registro:
+    get:
+      parameters:
+      - description: Evento ocorrido agora?
+        in: query
+        name: ocorrido_agora
+        required: true
+        type: boolean
+      - description: Horário do evento
+        in: query
+        name: horario_evento
+        required: true
+        type: string
+      - description: Quem está registrando?
+        in: query
+        name: reporter
+        required: true
+        type: string
+      - description: Descrição do evento
+        in: query
+        name: descricao
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/models.Record'
+        "400":
+          description: insira dados faltantes
+          schema:
+            $ref: '#/definitions/web.APIError'
+        "500":
+          description: falha na inserção de dados
+          schema:
+            $ref: '#/definitions/web.APIError'
+      summary: Adiciona um novo registro no diário
+swagger: "2.0"
