@@ -31,10 +31,18 @@ func (r Reports) HourArr() []string {
 	return output
 }
 
-func (r Reports) ToOptData() []opts.BarData {
+func (r Reports) ToBarData() []opts.BarData {
 	output := []opts.BarData{}
 	for i := range r {
 		output = append(output, opts.BarData{Value: r[i].Count})
+	}
+	return output
+}
+
+func (r Reports) ToFunnelData() []opts.FunnelData {
+	output := []opts.FunnelData{}
+	for i := range r {
+		output = append(output, opts.FunnelData{Value: r[i].Count})
 	}
 	return output
 }

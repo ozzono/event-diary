@@ -25,7 +25,8 @@ func TestReport(t *testing.T) {
 	r, err := ReportData(records)
 	assert.NoError(t, err)
 
-	chart.Chart(r.ToOptData(), r.HourArr())
+	// chart.BarChart(r.ToBarData(), r.HourArr())
+	chart.FunnelChart(r.ToFunnelData(), r.HourArr())
 }
 
 func newTestRecord(i int) []*Record {
