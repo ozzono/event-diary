@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -32,21 +30,7 @@ func main() {
 	g := r.Group("diario")
 
 	g.GET("/registro", api.AddRecord)
-	r.GET("/relatorio", func(c *gin.Context) {
-		// file, err := os.ReadFile("bar.html")
-		// if err != nil {
-		// 	c.JSON(http.StatusNotFound, web.APIError{ErrorCode: http.StatusNotFound, ErrorMessage: "relatório não encontrado; experimente fazer alguns registros"})
-		// }
-		c.HTML(
-			http.StatusOK,
-			"bar.html",
-			gin.H{
-				"content": "Esse é um relatório de crises",
-				"title":   "Relatório de crises",
-				"url":     "/bar.html",
-			},
-		)
-	})
+	g.GET("/relatorio", api.Report)
 	g.GET("/registros", api.AllRecords)
 
 	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json") // The url pointing to API definition

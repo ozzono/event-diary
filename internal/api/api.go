@@ -2,7 +2,6 @@ package api
 
 import (
 	"net/http"
-	"os"
 
 	"event-diary/chart"
 	"event-diary/internal/models"
@@ -37,12 +36,16 @@ func NewHandler(log *zap.SugaredLogger) (*handler, error) {
 // @Success 200 "ok"
 // @Router /relatorio [get]
 func (h *handler) Report(c *gin.Context) {
-	file, err := os.ReadFile("bar.html")
-	if err != nil {
-		c.JSON(http.StatusNotFound, web.APIError{ErrorCode: http.StatusNotFound, ErrorMessage: "relatório não encontrado; experimente fazer alguns registros"})
-	}
 	h.log.Info("show report")
-	c.HTML(http.StatusOK, string(file), nil)
+	c.HTML(
+		http.StatusOK,
+		"bar.html",
+		gin.H{
+			"content": "Esse é um relatório de crises",
+			"title":   "Relatório de crises",
+			"url":     "/bar.html",
+		},
+	)
 }
 
 // @Summary Adiciona um novo registro no diário
