@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"math/rand"
 	"regexp"
 	"strings"
 	"time"
@@ -14,8 +15,12 @@ const (
 	TimeFormatNow   = "15:04:05"
 )
 
+var (
+	TimeStampFormat = fmt.Sprintf("%s %s", TimeFormatToday, TimeFormatNow)
+)
+
 func Today() string {
-	return strings.Split(time.Now().Format(fmt.Sprintf("%s %s", TimeFormatToday, TimeFormatNow)), " ")[0]
+	return strings.Split(time.Now().Format(TimeStampFormat), " ")[0]
 }
 
 func Custom(input string) (string, error) {
@@ -30,5 +35,17 @@ func Custom(input string) (string, error) {
 }
 
 func Now() string {
-	return time.Now().Format(fmt.Sprintf("%s %s", TimeFormatToday, TimeFormatNow))
+	return time.Now().Format(TimeStampFormat)
+}
+
+func TimeParse(input string) (time.Time, error) {
+	output, err := time.Parse(TimeStampFormat, input)
+	if err != nil {
+		return time.Time{}, errors.Wrap(err, "time.Parse")
+	}
+	return output, nil
+}
+
+func RInt(i int) int {
+	return rand.New(rand.NewSource(time.Now().UnixNano())).Intn(i)
 }

@@ -60,3 +60,11 @@ func (c *Client) AllRecords() ([]*models.Record, error) {
 	c.log.Infof("records found %d", len(records))
 	return records, nil
 }
+
+// func (c *Client) RecordReport() ([]*models.Report, error) {
+// 	c.log.Info("starting record report")
+// 	records, err := c.AllRecords()
+// 	if err != nil {
+// 		return nil, errors.Wrap(err, "c.AllRecords")
+// 	}
+// }
