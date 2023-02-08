@@ -65,4 +65,25 @@ paths:
           schema:
             $ref: '#/definitions/web.APIError'
       summary: Adiciona um novo registro no diário
+  /registros:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/models.Record'
+            type: array
+      summary: Lista todos os registros
+  /relatorio:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+      summary: Exibe relatório com contagem de convulsões registradas ao longo do
+        dia
 swagger: "2.0"

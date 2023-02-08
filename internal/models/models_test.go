@@ -21,7 +21,7 @@ func TestReport(t *testing.T) {
 	for i := 0; i < 24; i++ {
 		records = append(records, newTestRecord(i)...)
 	}
-	t.Logf("len records %d", len(records))
+
 	r, err := ReportData(records)
 	assert.NoError(t, err)
 
@@ -38,6 +38,5 @@ func newTestRecord(i int) []*Record {
 			EventTime: fmt.Sprintf("%s %s", utils.Today(), strings.Join(now, ":")),
 		})
 	}
-	fmt.Printf("%d new records at %02dh\n", len(output), i)
 	return output
 }

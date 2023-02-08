@@ -31,9 +31,15 @@ func FunnelChart(data []opts.FunnelData, axis []string) {
 		Title:    "Resumo de convulsões",
 		Subtitle: "Visualização por hora do dia",
 	}))
+	// }), charts.WithToolboxOpts(opts.Toolbox{
+	// 	Feature: &opts.ToolBoxFeature{
+	// 		SaveAsImage: &opts.ToolBoxFeatureSaveAsImage{Show: true, Title: "Save as image", Type: "png"},
+	// 	}}))
+
 	// Put data into instance
 	funnel.AddSeries("Hora do dia", data)
 	// Where the magic happens
 	f, _ := os.Create("bar.html")
+	// f, _ := os.Create("img.png")
 	funnel.Render(f)
 }

@@ -32,6 +32,7 @@ func (r Reports) HourArr() []string {
 }
 
 func (r Reports) ToBarData() []opts.BarData {
+	r.SortReportsByHour()
 	output := []opts.BarData{}
 	for i := range r {
 		output = append(output, opts.BarData{Value: r[i].Count})
@@ -40,10 +41,12 @@ func (r Reports) ToBarData() []opts.BarData {
 }
 
 func (r Reports) ToFunnelData() []opts.FunnelData {
+	r.SortReportsByHour()
 	output := []opts.FunnelData{}
 	for i := range r {
-		output = append(output, opts.FunnelData{Value: r[i].Count})
+		output = append(output, opts.FunnelData{Name: fmt.Sprintf("%02d", r[i].Hour), Value: r[i].Count})
 	}
+
 	return output
 }
 

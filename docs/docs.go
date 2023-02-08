@@ -73,6 +73,38 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/registros": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Lista todos os registros",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Record"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/relatorio": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Exibe relatório com contagem de convulsões registradas ao longo do dia",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
         }
     },
     "definitions": {
